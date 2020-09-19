@@ -1,13 +1,13 @@
-import React from 'react';
-import { Text, View } from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Ionicons from 'react-native-vector-icons/Ionicons';
+import React from "react";
+import { Text, View } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Ionicons from "react-native-vector-icons/Ionicons";
 
-import HomeScreen from './screens/HomeScreen';
-import OrderScreen from './screens/OrderScreen';
-import HistoryScreen from './screens/HistoryScreen';
-import ProfileScreen from './screens/ProfileScreen';
+import HomeScreen from "./screens/HomeScreen";
+import OrderScreen from "./screens/OrderScreen";
+import HistoryScreen from "./screens/HistoryScreen";
+import ProfileScreen from "./screens/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 
@@ -19,17 +19,16 @@ export default function App() {
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
 
-            if (route.name === 'Home') {
-              iconName = focused
-                ? 'md-home' : 'md-home';
-            } else if (route.name === 'Order') {
-              iconName = focused ? 'md-list-box' : 'md-list';
-            } else if (route.name === 'History') {
-              iconName = focused ? 'md-list-box' : 'md-list';
-            } else if (route.name === 'Profile') {
-              iconName = focused ? 'md-contact' : 'md-contact';
+            if (route.name === "Home") {
+              iconName = focused ? "md-home" : "md-home";
+            } else if (route.name === "Order") {
+              iconName = focused ? "md-list-box" : "md-list";
+            } else if (route.name === "History") {
+              iconName = focused ? "md-list-box" : "md-list";
+            } else if (route.name === "Profile") {
+              iconName = focused ? "md-contact" : "md-contact";
             }
-            
+
             return <Ionicons name={iconName} size={size} color={color} />;
           },
         })}
@@ -47,7 +46,6 @@ export default function App() {
 // import OrderScreen from './screens/OrderScreen';
 // import HistoryScreen from './screens/HistoryScreen';
 // import ProfileScreen from './screens/ProfileScreen';
-
 
 // const Tab = createBottomTabNavigator();
 
@@ -69,19 +67,8 @@ export default function App() {
 //   );
 // }
 
-
-
-
-
-
-
-
-
-
-
-
-
-{/* <Stack.Navigator>
+{
+  /* <Stack.Navigator>
   <Stack.Screen name="Home" component={HomeScreen} options={{
     title: "Home",
     headerStyle: {
@@ -90,4 +77,5 @@ export default function App() {
   }} />
   <Stack.Screen name="KangCukur" component={HomeScreen2} />
   <Stack.Screen name="Maps" component={MapsScreen} />
-</Stack.Navigator> */}
+</Stack.Navigator> */
+}
