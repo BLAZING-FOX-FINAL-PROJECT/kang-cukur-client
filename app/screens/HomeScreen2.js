@@ -5,13 +5,13 @@ import { Button, StyleSheet, Text, View } from 'react-native';
 export default function HomeScreen2({ navigation }) {
   
   function buttonOnPress() {
-    navigation.navigate("Home")
+    navigation.navigate("Maps")
   }
 
   return (
     <View style={styles.container}>
       <Text>Kang Cukur</Text>
-      <Button onPress={buttonOnPress} title="Back Home" />
+      <Button onPress={buttonOnPress} title="Open Maps" />
       <StatusBar style="auto" />
     </View>
   );

@@ -96,5 +96,10 @@ const styles = StyleSheet.create({
   },
 });
 
+==================================================================
 
 
+React native splash Screen
+
+Step 1 : Install 
+npm i react-native-splash-screen --save

@@ -11,9 +11,14 @@ export default function MapsScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      {/* <Text>Maps</Text> */}
-      <MapView style={styles.mapStyle} />
-      {/* <Button onPress={buttonOnPress} title="Home" /> */}
+      <Text>Maps</Text>
+      <MapView style={styles.mapStyle} initialRegion={{
+        latitude: 37.78825,
+        longitude: -122.4324,
+        latitudeDelta: 0.0922,
+        longitudeDelta: 0.0421,
+      }} />
+      <Button onPress={buttonOnPress} title="Home" />
       <StatusBar style="auto" />
     </View>
   );
