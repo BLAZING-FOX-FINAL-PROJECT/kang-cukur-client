@@ -1,0 +1,105 @@
+Welcome Home :
+
+Step 1 :Create Expo pkg
+expo init app
+
+Step 2 : Delete Git infolder app
+cd app/
+sudo rm -r .git
+
+Step 3 : Change to branch Development
+git checkout -b "development"
+
+Step 4: Git commit and push to development branch
+git add .
+git commit -m "Init"
+git push -u origin development
+
+Commit Release 0: Init
+
+Step 1 : Install React navigation 
+npm install @react-navigation/native
+
+Step 2 : Installing dependencies into an Expo managed project
+expo install react-native-gesture-handler react-native-reanimated react-native-screens react-native-safe-area-context @react-native-community/masked-view
+
+Step 3 : Installing the stack navigator library
+npm install @react-navigation/stack
+
+Step 4 : Creating a stack navigator in app.js
+
+import React from 'react';
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+// import HomeScreen from './screens/HomeScreen';
+
+function HomeScreen() {
+  return (
+    <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+const Stack = createStackNavigator();
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name="Home" component={HomeScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
+
+Step 5 : Add Screen Mapss and KangCukur
+
+Step 6: Install react native maps dari expo
+expo install react-native-maps
+
+Step 7 : Import to your screen
+import MapView from 'react-native-maps';
+
+example :
+import React from 'react';
+import MapView from 'react-native-maps';
+import { StyleSheet, Text, View, Dimensions } from 'react-native';
+
+export default class App extends React.Component {
+  render() {
+    return (
+      <View style={styles.container}>
+        <MapView
+          initialRegion={{
+            latitude: 37.78825,
+            longitude: -122.4324,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          }}
+        />
+      </View>
+    );
+  }
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  mapStyle: {
+    width: Dimensions.get('window').width,
+    height: Dimensions.get('window').height,
+  },
+});
+
+==================================================================
+
+
+React native splash Screen
+
+Step 1 : Install 
+npm i react-native-splash-screen --save
