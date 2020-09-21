@@ -1,6 +1,6 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import { Button, StyleSheet, Text, View, Image } from "react-native";
+import { Button, StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import Colors from "../constants/colors";
 import Card from "../components/Card";
 import Header from "../components/Header";
@@ -35,6 +35,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     color: "#303030",
+    backgroundColor: Colors.base2,
   },
   profileContainer: {
     width: "80%",

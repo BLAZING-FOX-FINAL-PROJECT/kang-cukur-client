@@ -27,6 +27,8 @@ export default function App() {
               iconName = focused ? "md-list-box" : "md-list";
             } else if (route.name === "Profile") {
               iconName = focused ? "md-contact" : "md-contact";
+            } else {
+              iconName = focused ? "md-contact" : "md-contact";
             }
 
             return <Ionicons name={iconName} size={size} color={color} />;
