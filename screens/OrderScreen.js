@@ -3,12 +3,13 @@ import React from "react";
 import {
   StyleSheet,
   View,
+  Text,
   FlatList,
   ActivityIndicator,
   Dimensions,
 } from "react-native";
 import OrderCards from "../components/OrderCards";
-import OrderStatus from "../components/OrderStatus";
+import DetailsCard from "../components/DetailsCard";
 import Header from "../components/Header";
 import Colors from "../constants/colors";
 
@@ -31,13 +32,7 @@ export default function OrderScreen({ navigation }) {
         <Header title="Orders" />
       </View>
       <View style={{ width: windowWidth, flex: 4, marginTop: -200 }}>
-        <FlatList
-          data={sample}
-          renderItem={({ item, index }) => {
-            return <OrderCards item={item} />;
-          }}
-          keyExtractor={(item, index) => `${index}`}
-        />
+        <Text>ORDERS</Text>
       </View>
       <StatusBar style="auto" />
     </View>

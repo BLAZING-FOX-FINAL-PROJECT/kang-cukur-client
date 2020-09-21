@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { Ionicons } from "react-native-vector-icons";
 
 import HomeScreen from "./screens/HomeScreen";
 import OrderScreen from "./screens/OrderScreen";
@@ -20,15 +20,13 @@ export default function App() {
             let iconName;
 
             if (route.name === "Home") {
-              iconName = focused ? "md-home" : "md-home";
+              iconName = "md-home";
             } else if (route.name === "Order") {
-              iconName = focused ? "md-list-box" : "md-list";
+              iconName = "md-list";
             } else if (route.name === "History") {
-              iconName = focused ? "md-list-box" : "md-list";
+              iconName = "md-time";
             } else if (route.name === "Profile") {
-              iconName = focused ? "md-contact" : "md-contact";
-            } else {
-              iconName = focused ? "md-contact" : "md-contact";
+              iconName = "md-contact";
             }
 
             return <Ionicons name={iconName} size={size} color={color} />;
@@ -42,42 +40,4 @@ export default function App() {
       </Tab.Navigator>
     </NavigationContainer>
   );
-}
-
-// import HomeScreen from './screens/HomeScreen';
-// import OrderScreen from './screens/OrderScreen';
-// import HistoryScreen from './screens/HistoryScreen';
-// import ProfileScreen from './screens/ProfileScreen';
-
-// const Tab = createBottomTabNavigator();
-
-// export default function App() {
-//   return (
-//     <NavigationContainer>
-//       <Tab.Navigator
-//         tabBarOptions={{
-//           activeTintColor: 'tomato',
-//           inactiveTintColor: 'gray',
-//         }}
-//       >
-//         <Tab.Screen name="Home" component={HomeScreen} />
-//         <Tab.Screen name="Order" component={OrderScreen} />
-//         <Tab.Screen name="History" component={HistoryScreen} />
-//         <Tab.Screen name="Profile" component={ProfileScreen} />
-//       </Tab.Navigator>
-//     </NavigationContainer>
-//   );
-// }
-
-{
-  /* <Stack.Navigator>
-  <Stack.Screen name="Home" component={HomeScreen} options={{
-    title: "Home",
-    headerStyle: {
-      backgroundColor: "#f4511e"
-    }
-  }} />
-  <Stack.Screen name="KangCukur" component={HomeScreen2} />
-  <Stack.Screen name="Maps" component={MapsScreen} />
-</Stack.Navigator> */
 }
