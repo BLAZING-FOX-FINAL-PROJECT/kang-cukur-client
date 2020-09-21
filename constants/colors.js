@@ -6,5 +6,6 @@ export default {
   color5: '27ae60',
   color6: '#f1c40f',
   color7: '2980b9',
-  color8: 'c0392b'
+  color8: 'c0392b',
+  color9: '#fff'
 };

@@ -1,29 +1,37 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { Button, StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { Button, StyleSheet, Text, View, TextInput, Image, Alert, TouchableOpacity, TouchableWithoutFeedback, Keyboard} from 'react-native';
+import  Colors  from '../constants/colors';
+import Card from '../components/Card'
+import { Entypo,Ionicons,MaterialIcons } from '@expo/vector-icons'; 
+import Carousel from 'react-native-snap-carousel';
+
 
 export default function HomeScreen2({ navigation }) {
-  
-  function buttonOnPress() {
-    navigation.navigate("Maps")
-  }
+  const [name, setName] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [address, setAddress] = useState('')
+  const [password, setPassword] = useState('')
+
 
   return (
-    <View style={styles.container}>
-      <Text>Kang Cukur</Text>
-      <Button onPress={buttonOnPress} title="Open Maps" />
-      <StatusBar style="auto" />
+    <View style={styles.screen}>
+      {/* <Carousel
+        ref={(c) => { this._carousel = c; }}
+        data={this.state.entries}
+        renderItem={this._renderItem}
+        sliderWidth={sliderWidth}
+        itemWidth={itemWidth}
+      /> */}
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
+  screen: {
     justifyContent: 'center',
+    alignItems: 'center',
+    flex: 1
   },
-});
+})
 
 
