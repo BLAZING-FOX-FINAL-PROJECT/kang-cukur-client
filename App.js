@@ -4,7 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "react-native-vector-icons";
 
-import HomeScreen from "./screens/HomeScreen";
+import HomeScreen from "./screens/HomeScreen2";
 import OrderScreen from "./screens/OrderScreen";
 import HistoryScreen from "./screens/LoginScreen";
 import ProfileScreen from "./screens/ProfileScreen";
