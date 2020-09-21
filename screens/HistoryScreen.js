@@ -19,6 +19,7 @@ export default function HistoryScreen({ navigation }) {
   });
 
   return (
+
     <View style={styles.container}>
       <View style={styles.container}>
         <View style={{ width: "100%", flex: 2 }}>
