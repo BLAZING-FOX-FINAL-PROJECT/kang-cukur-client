@@ -1,35 +1,57 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { Button, StyleSheet, Text, View, Dimensions } from "react-native";
-import Colors from "../constants/colors";
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  ActivityIndicator,
+  Dimensions,
+} from "react-native";
+import OrderCards from "../components/OrderCards";
+// import DetailsCard from "../components/DetailsCard";
 import Header from "../components/Header";
+import Colors from "../constants/colors";
 
-export default function HistoryScreen({ navigation }) {
+export default function OrderScreen({ navigation }) {
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
-  
-  const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      width: windowWidth,
-      backgroundColor: Colors.base2,
-      alignItems: "center",
-      justifyContent: "center",
-    },
-  });
+  const sample = [
+    { name: "kang cukur 1", status: "completed", tanggal: "202020" },
+    { name: "kang cukur 2", status: "canceled", tanggal: "212121" },
+    { name: "kang cukur 3", status: "canceled", tanggal: "212121" },
+    { name: "kang cukur 1", status: "completed", tanggal: "202020" },
+    { name: "kang cukur 2", status: "canceled", tanggal: "212121" },
+    { name: "kang cukur 3", status: "canceled", tanggal: "222222" },
+    { name: "kang cukur 1", status: "completed", tanggal: "202020" },
+  ];
 
   return (
 
     <View style={styles.container}>
-      <View style={styles.container}>
-        <View style={{ width: "100%", flex: 2 }}>
-          <Header title="History" />
-        </View>
-        <View style={{ width: "100%", flex: 4, marginTop: -200 }}>
-          <Text>HISTORY</Text>
-        </View>
-        <StatusBar style="auto" />
+      <View style={{ width: windowWidth, flex: 2 }}>
+        <Header title="Order History" />
       </View>
+      <View style={{ width: windowWidth, flex: 4, marginTop: -200 }}>
+        <FlatList
+          data={sample}
+          renderItem={({ item, index }) => {
+            return <OrderCards item={item} />;
+          }}
+          keyExtractor={(item, index) => `${index}`}
+        />
+      </View>
+      <StatusBar style="auto" />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: Colors.base1,
+    alignItems: "center",
+    justifyContent: "center",
+    color: Colors.color1,
+    backgroundColor: Colors.base2,
+  },
+});

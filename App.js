@@ -2,7 +2,7 @@ import React from "react";
 import { Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Ionicons from "react-native-vector-icons/Ionicons";
+import { Ionicons } from "react-native-vector-icons";
 
 import HomeScreen from "./screens/HomeScreen";
 import OrderScreen from "./screens/OrderScreen";
@@ -20,15 +20,13 @@ export default function App() {
             let iconName;
 
             if (route.name === "Home") {
-              iconName = focused ? "md-home" : "md-home";
+              iconName = "md-home";
             } else if (route.name === "Order") {
-              iconName = focused ? "md-list-box" : "md-list";
+              iconName = "md-list";
             } else if (route.name === "History") {
-              iconName = focused ? "md-list-box" : "md-list";
+              iconName = "md-time";
             } else if (route.name === "Profile") {
-              iconName = focused ? "md-contact" : "md-contact";
-            } else {
-              iconName = focused ? "md-contact" : "md-contact";
+              iconName = "md-contact";
             }
 
             return <Ionicons name={iconName} size={size} color={color} />;
@@ -42,4 +40,4 @@ export default function App() {
       </Tab.Navigator>
     </NavigationContainer>
   );
-}
+
