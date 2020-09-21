@@ -6,7 +6,7 @@ import { Ionicons } from "react-native-vector-icons";
 
 import HomeScreen from "./screens/HomeScreen";
 import OrderScreen from "./screens/OrderScreen";
-import HistoryScreen from "./screens/HistoryScreen";
+import HistoryScreen from "./screens/LoginScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
@@ -40,4 +40,4 @@ export default function App() {
       </Tab.Navigator>
     </NavigationContainer>
   );
-}
+
