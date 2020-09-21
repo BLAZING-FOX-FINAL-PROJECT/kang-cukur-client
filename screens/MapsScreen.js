@@ -1,28 +1,177 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { Button, StyleSheet, Text, View, Dimensions } from 'react-native';
-import MapView from 'react-native-maps';
+import React, { Component } from 'react'
+import { Dimensions, StyleSheet, Text, View, Image } from 'react-native';
+import Header from '../components/Header';
+import MapView from 'react-native-maps'
+import * as Permissions from 'expo-permissions'
+import Polyline from '@mapbox/polyline'
 
-export default function MapsScreen({ navigation }) {
+import { Marker } from 'react-native-maps'
 
-  function buttonOnPress() {
-    navigation.navigate("Home")
+import MapViewDirections from 'react-native-maps-directions';
+// const origin = {latitude: -7.557482,  longitude: 110.848912};
+// const destination = {latitude: -7.552847,  longitude: 110.821877};
+// const GOOGLE_MAPS_APIKEY = '…';
+
+
+const locations = require("../locations.json")
+const { width, height } = Dimensions.get('window')
+
+const GOOGLE_MAP_KEY = 'AIzaSyDLbs4yYjr32vm1H2GIVVMUdOKNjGRzf3o'
+// const GOOGLE_MAP_KEY = 'AIzaSyAAGaL2oshxzqev_ePMBA63zOE4q4pz5fM'
+
+
+
+export default class MapsScreen extends Component {
+  state = {
+    latitude : null,
+    longitude : null,
+    locations: locations
   }
 
-  return (
-    <View style={styles.container}>
-      <Text>Maps</Text>
-      <MapView style={styles.mapStyle} initialRegion={{
-        latitude: 37.78825,
-        longitude: -122.4324,
-        latitudeDelta: 0.0922,
-        longitudeDelta: 0.0421,
-      }} />
-      <Button onPress={buttonOnPress} title="Home" />
-      <StatusBar style="auto" />
-    </View>
-  );
+  async componentDidMount() {
+    const { status } = await Permissions.getAsync(Permissions.LOCATION)
+
+    console.log(status,"status")
+    if (status !== 'granted') {
+      const response = await Permissions.askAsync(Permissions.LOCATION)
+      console.log(response,"respone")
+    }
+
+    navigator.geolocation.getCurrentPosition(
+      ({ coords: { latitude, longitude }}) => this.setState({latitude, longitude }, this.mergeCoords),
+      (error) => console.log('error getCurr:',error)
+    )
+
+    const { locations: [ sampleLocation] } = this.state
+
+    this.setState({
+      desLatitude: sampleLocation.coords.latitude,
+      desLongitude: sampleLocation.coords.longitude
+    }, this.mergeCoords)
+  }
+
+
+  mergeCoords = () => {
+    const {
+      latitude,
+      longitude,
+      desLatitude,
+      desLongitude
+    } = this.state
+
+    const hasStartAndEnd = latitude !== null && desLatitude !== null
+
+
+    if(hasStartAndEnd) {
+      const concatStart = `${latitude},${longitude}`
+      const concatEnd = `${desLatitude},${desLongitude}`
+      this.getDirections(concatStart, concatEnd)
+    }
+  }
+
+  async getDirections(startLoc, desLoc) {
+    try {
+      const resp = await fetch(`https://maps.googleapis.com/maps/api/directions/json?origin=${startLoc}&destination=${desLoc}&key=${GOOGLE_MAP_KEY}`)
+      const respJson = await resp.json();
+      console.log(respJson,"<<<<<<<")
+      const points = Polyline.decode(respJson.routes[0].overview_polyline.points);
+      const coords = points.map(point => {
+        return {
+          latitude: point[0],
+          longitude: point[1]
+        }
+      })
+      this.setState({ coords, distance, time })
+    } catch(error) {
+      console.log('Error getDir: ', error)
+    }
+  }
+
+  onMarkerPress = location => () => {
+    const { coords: { latitude, longitude } } =location
+    this.setState({
+      destination:location,
+      desLatitude: latitude,
+      desLongitude: longitude
+
+    }, this.mergeCoords)
+  }
+
+  renderMarkers = () => {
+    const { locations } = this.state
+    return (
+      <View>
+        {
+          locations.map((location, idx) => {
+            const { coords: { latitude, longitude }} = location
+            return (
+              <Marker
+                key={idx}
+                coordinate={{ latitude, longitude }}
+                onPress={this.onMarkerPress(location)}
+                pinColor={"green"}
+              />
+            )
+          })
+        }
+      </View>
+    )
+  }
+
+          // <Marker coordinate={{ latitudeDriver, longitudeDriver }}
+          //   pinColor={"purple"} // any color
+          //   title={"title"}
+          //   description={"description"}
+          // />
+
+  render() {
+    const { latitude, longitude, coords, destination } = this.state
+
+    if (latitude) {
+      return (
+        <MapView
+          showsUserLocation
+          style={{ flex : 1}}
+          initialRegion = {{
+            latitude,
+            longitude,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421
+          }}
+        >
+        <Header title="Maps" />
+        {this.renderMarkers()}
+          <MapView.Polyline
+            strokeWidth={2}
+            strokeColor="red"
+            coordinates={coords}
+          >
+          </MapView.Polyline>
+          <Image
+            source={{uri: destination && destination.image_url}}
+            style={{
+              flex: 1,
+              width: width * 0.95,
+              alignSelf: 'center',
+              height: height * 0.15,
+              position: 'absolute',
+              bottom: height * 0.05
+
+            }}
+          />
+
+        </MapView>
+      )
+    }
+
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <Text>We need your permissions</Text>
+      </View>
+    )
+  }
 }
+
 
 const styles = StyleSheet.create({
   container: {
@@ -31,10 +180,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  mapStyle: {
-    width: Dimensions.get('window').width,
-    height: Dimensions.get('window').height,
-  },
 });
-
-
