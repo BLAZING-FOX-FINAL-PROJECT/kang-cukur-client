@@ -6,7 +6,7 @@ import Ionicons from "react-native-vector-icons/Ionicons";
 
 import HomeScreen from "./screens/HomeScreen";
 import OrderScreen from "./screens/OrderScreen";
-import HistoryScreen from "./screens/HistoryScreen";
+import HistoryScreen from "./screens/LoginScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
@@ -26,6 +26,8 @@ export default function App() {
             } else if (route.name === "History") {
               iconName = focused ? "md-list-box" : "md-list";
             } else if (route.name === "Profile") {
+              iconName = focused ? "md-contact" : "md-contact";
+            } else {
               iconName = focused ? "md-contact" : "md-contact";
             }
 

@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 40,
-    borderBottomColor: Colors.color1,
+    borderBottomColor: Colors.accent,
     borderBottomWidth: 2,
     textAlign: 'center',
     width: 300,
@@ -104,7 +104,7 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    backgroundColor: Colors.color1,
+    backgroundColor: Colors.accent,
     padding: 10,
     width: '80%',
     borderRadius: 20,
@@ -114,11 +114,11 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   buttonTextoutline: {
-    color: Colors.color1
+    color: Colors.accent
   },
   buttonOutline: {
     alignItems: "center",
-    borderColor: Colors.color1,
+    borderColor: Colors.accent,
     borderWidth: 1,
     padding: 10,
     width: '80%',

@@ -12,7 +12,8 @@ export default function ProfileScreen({ navigation }) {
 
   const [showEdit, setShowEdit] = useState(false)
 
-  const editProfile = (name, phoneNumber, address) => { 
+  const editProfile = (name, phoneNumber, address) => {
+    console.log(name)
     setName(name)
     setPhoneNumber(phoneNumber)
     setAddress(address)
@@ -37,7 +38,7 @@ export default function ProfileScreen({ navigation }) {
 
       <Card style={styles.profileContainer}>
         <Image
-          onPress={()=> setShowEdit(true)}
+          onPress={() => setShowEdit(true)}
           style={styles.fotoProfile}
           source={{
             uri:
@@ -80,7 +81,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: 200,
     marginTop: 100,
-    marginBottom:20
+    marginBottom: 20
   },
   fotoProfile: {
     borderColor: 'black',
@@ -92,14 +93,14 @@ const styles = StyleSheet.create({
   name: {
     marginTop: 10,
     fontSize: 26,
-    fontWeight:"bold"
+    fontWeight: "bold"
   },
   phoneNumber: {
     color: '#303030',
     fontSize: 14
   },
   address: {
-    marginTop:10,
+    marginTop: 10,
     fontSize: 16,
     fontWeight: '700',
     textAlign: 'center',
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
   },
   button: {
     alignItems: "center",
-    backgroundColor: Colors.color1,
+    backgroundColor: Colors.accent,
     padding: 10,
     width: '80%',
     borderRadius: 20,
@@ -115,7 +116,7 @@ const styles = StyleSheet.create({
   },
   buttonOutline: {
     alignItems: "center",
-    borderColor: Colors.color1,
+    borderColor: Colors.accent,
     borderWidth: 1,
     padding: 10,
     width: '80%',
@@ -126,7 +127,7 @@ const styles = StyleSheet.create({
     color: 'white'
   },
   buttonTextoutline: {
-    color: Colors.color1
+    color: Colors.accent
   }
 
 });
