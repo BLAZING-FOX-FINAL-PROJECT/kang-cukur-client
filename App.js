@@ -2,12 +2,15 @@ import React from "react";
 import { Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from "react-native-vector-icons";
 
 import HomeScreen from "./screens/HomeScreen";
 import OrderScreen from "./screens/OrderScreen";
 import HistoryScreen from "./screens/HistoryScreen";
 import ProfileScreen from "./screens/ProfileScreen";
+import VarianCukurScreen from "./screens/VarianCukurScreen";
+import { MainStackNavigator } from "./navigation/StackNavigator";
 
 const Tab = createBottomTabNavigator();
 
@@ -33,7 +36,7 @@ export default function App() {
           },
         })}
       >
-        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Home" component={MainStackNavigator} />
         <Tab.Screen name="Order" component={OrderScreen} />
         <Tab.Screen name="History" component={HistoryScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
