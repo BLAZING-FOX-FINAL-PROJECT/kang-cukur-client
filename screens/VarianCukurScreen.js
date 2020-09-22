@@ -6,12 +6,17 @@ import {
   Dimensions,
   TouchableOpacity,
   FlatList,
+  AsyncStorage
 } from "react-native";
+import { useDispatch } from "react-redux"
 import Colors from "../constants/colors";
 import VarianList from "../components/VarianList";
 import { FontAwesome } from "react-native-vector-icons";
+import {postTransactionCustom} from "../store/action/index"
 
-export default function VarianCukurScreen() {
+
+export default function VarianCukurScreen({navigation}) {
+  const dispatch = useDispatch()
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
   const [servis, setServis] = useState([]);
@@ -128,11 +133,53 @@ export default function VarianCukurScreen() {
     setServis(removeService);
   };
 
+  const postCukurNow = async () => {
+      console.log(customerLatitude,
+        customerLongitude,
+        servis,'disini cuy')
+
+    const access =  await AsyncStorage.getItem("access_token")
+    console.log(access)
+    if(!customerLatitude || !customerLongitude || !servis.length) {
+      console.log("Nooo")
+    } else {
+      const url = 'https://tukangcukur.herokuapp.com/transaksi/'
+      const myRequest = new Request(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'access_token':access
+        },
+        body: JSON.stringify({
+          customerLatitude,
+          customerLongitude,
+          servis
+        })
+      });
+      fetch(myRequest)
+      // .then((resp) => resp.json())
+      .then(() =>{
+        // dispatch()
+        navigation.navigate("Order")
+      })
+      .catch(console.log)
+
+      // dispatch(postTransactionCustom({
+      //   access_token:access,
+      //   customerLatitude,
+      //   customerLongitude,
+      //   servis
+      // }))
+    }
+
+  }
+
+        // <Text>{JSON.stringify(customerLatitude)}</Text>
+        // <Text>{JSON.stringify(customerLongitude)}</Text>
   return (
     <View style={styles.container}>
       <View style={styles.form}>
-        <Text>{JSON.stringify(customerLatitude)}</Text>
-        <Text>{JSON.stringify(customerLongitude)}</Text>
+
         <View
           style={{
             backgroundColor: Colors.accent,
@@ -173,6 +220,7 @@ export default function VarianCukurScreen() {
             borderRadius: 50,
             elevation: 8,
           }}
+          onPress={() => postCukurNow()}
         >
           <Text style={{ color: Colors.base1, fontSize: 30 }}>CUKUR NOW</Text>
         </TouchableOpacity>

@@ -64,10 +64,11 @@ const HomeScreen2 = ({ navigation }) => {
 
       </View>
       <View style={styles.groupTitle}>
-        
+
         <Text style={styles.textTitle}>Choose Your Service</Text>
 
       </View>
+
       <ScrollView horizontal={true}>
         <View style={styles.btnGroup}>
 
@@ -108,6 +109,7 @@ const HomeScreen2 = ({ navigation }) => {
         </View>
       </ScrollView>
       
+
     </View>
   )
 }
