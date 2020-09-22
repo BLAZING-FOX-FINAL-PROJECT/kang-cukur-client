@@ -103,3 +103,26 @@ React native splash Screen
 
 Step 1 : Install 
 npm i react-native-splash-screen --save
+
+=====================================================================
+
+React native Animatable
+
+https://github.com/oblador/react-native-animatable
+
+1. Install
+2. Import
+import * as Animatable from 'react-native-animatable';
+3. use
+
+Animate gambar pertama
+animation="bounceIn"
+duration="1500"
+
+Animate footer / layer 2
+animation="fadeInUpBig"
+
+==============================================================
+React native Linear Gradient
+
+Toucable opactity, linear gradient, text

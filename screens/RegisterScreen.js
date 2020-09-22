@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button, StyleSheet, Text, View, TextInput, Image, Alert, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Colors from '../constants/colors';
 import Card from '../components/Card'
+import { Entypo, MaterialIcons } from '@expo/vector-icons';
 
 
 export default function Register({ navigation }) {
@@ -9,7 +10,60 @@ export default function Register({ navigation }) {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [address, setAddress] = useState('')
   const [password, setPassword] = useState('')
+  const [validNumber, setValidNumber] = useState(false)
+  const [validName, setValidName] = useState(false)
+  const [validAddress, setValidAddress] = useState(false)
 
+  const [isSecureText, setIsSecureText] = useState(true)
+
+  const numberInputHandler = input => {
+    setPhoneNumber(input.replace(/[^0-9]/g, ''))
+    if (phoneNumber.length > 10) {
+      setValidNumber(true)
+    } else {
+      setValidNumber(false)
+
+    }
+  }
+
+  const nameInputHandler = input => {
+    let validasiHuruf = /^[a-zA-Z ]+$/;
+    if (input.match(validasiHuruf)) {
+      setName(input)
+    }
+    else {
+      alert("Masukkan nama Anda!\nFormat wajib huruf!");
+      setName('')
+      setValidName(false)
+    }
+    if (name.length >5) {
+      setValidName(true)
+    } else {
+      setValidName(false)
+
+    }
+  }
+
+  const addresInputHandler = input => {
+    setAddress(input)
+    if (address.length > 5) {
+      setValidAddress(true)
+    } else {
+      setValidAddress(false)
+
+    }
+  }
+
+  const changeSecureText = () => {
+    setIsSecureText(!isSecureText)
+  }
+
+  const onRegisterHandler = () => {
+    setName('')
+    setAddress('')
+    setPhoneNumber('')
+    setPassword('')
+  }
 
   return (
     <TouchableWithoutFeedback
@@ -18,54 +72,73 @@ export default function Register({ navigation }) {
       }}>
 
       <View style={styles.screen}>
-        <Card style={styles.formContainer}>
-          <Image
-            style={styles.fotoProfile}
-            source={{
-              uri:
-                'https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png',
-            }}
-          />
-          <Text style={styles.title}>NAMA</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={text => setName(text)}
-            value={name}
-            placeholder="e.g. John Doe"
-          />
-          <Text style={styles.title}>PASSWORD</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={text => setPassword(text)}
-            value={password}
-            placeholder=""
+        <View style={styles.header}>
+          <Text style={styles.textTitle}>Register Dong !</Text>
+        </View>
 
-          />
-          <Text style={styles.title}>PHONE NUMBER</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={text => setPhoneNumber(text)}
-            value={phoneNumber}
-            placeholder="e.g. 082362097322"
+        <View style={styles.inputContainer}>
+          <View style={styles.inputFirst}>
+            <Entypo name="user" size={24} color="black" />
+            <TextInput
+              style={styles.input}
+              onChangeText={text => nameInputHandler(text)}
+              value={name}
+              placeholder="Username"
+            />
 
-          />
-          <Text style={styles.title}>ADDRESS</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={text => setAddress(text)}
-            value={address}
-            placeholder="e.g. Jl, Dago. Bandung"
+          </View>
+          <Entypo name="check" size={24} color={validName ? Colors.accent : '#d2d2d2'} />
+        </View>
 
-          />
-        </Card>
-        {/* <Button
-          onPress={() => Alert.alert('Simple Button pressed')}
-          title="Register"
-          accessibilityLabel="Learn more about this purple button"
-        /> */}
+        <View style={styles.inputContainer}>
+          <View style={styles.inputFirst}>
+            <MaterialIcons name="place" size={24} color="black" />
+            <TextInput
+              style={styles.input}
+              onChangeText={text => addresInputHandler(text)}
+              value={address}
+              placeholder="Address"
+            />
+
+          </View>
+          <Entypo name="check" size={24} color={validAddress ? Colors.accent : '#d2d2d2'} />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <View style={styles.inputFirst}>
+            <Entypo name="phone" size={24} color="black" />
+            <TextInput
+              style={styles.input}
+              keyboardType="number-pad"
+              onChangeText={input => numberInputHandler(input)}
+              value={phoneNumber}
+              placeholder="Phone Number"
+            />
+
+          </View>
+          <Entypo name="check" size={24} color={validNumber ? Colors.accent : '#d2d2d2'} />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <View style={styles.inputFirst}>
+            <Entypo name="lock" size={24} color="black" />
+            <TextInput
+              style={styles.input}
+              secureTextEntry={isSecureText}
+              onChangeText={text => setPassword(text)}
+              value={password}
+              placeholder="Password"
+            />
+
+          </View>
+          <TouchableOpacity onPress={changeSecureText}>
+            <Entypo name={isSecureText ? "eye-with-line" : "eye"} size={24} color="black" />
+
+          </TouchableOpacity>
+        </View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => Alert.alert('Simple Button pressed')}
+          onPress={() => onRegisterHandler()}
         >
           <Text style={styles.buttonText}>REGISTER</Text>
         </TouchableOpacity>
@@ -75,14 +148,35 @@ export default function Register({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  inputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    padding: 10,
+    marginBottom: 20,
+    maxWidth: '90%',
+    borderBottomWidth: 1,
+    borderBottomColor: Colors.accent
+  },
+  inputFirst: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
   screen: {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1
   },
+  header: {
+    marginVertical: 20
+  },
+  textTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+
+  },
   formContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
     marginBottom: 20
   },
   fotoProfile: {
@@ -93,15 +187,10 @@ const styles = StyleSheet.create({
     marginTop: -90,
   },
   input: {
-    height: 40,
-    borderBottomColor: Colors.accent,
-    borderBottomWidth: 2,
-    textAlign: 'center',
     width: 300,
-    marginBottom: 20,
-    borderRadius: 10,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
+    paddingHorizontal: 10
   },
   button: {
     alignItems: "center",
@@ -109,11 +198,29 @@ const styles = StyleSheet.create({
     padding: 10,
     width: '80%',
     borderRadius: 20,
-    elevation: 8
+    elevation: 8,
+    marginTop: 30
+  },
+  buttonOutline: {
+    alignItems: "center",
+    borderColor: Colors.accent,
+    borderWidth: 1,
+    padding: 10,
+    width: '80%',
+    borderRadius: 20,
+    marginTop: 20
   },
   buttonText: {
-    color: 'white'
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18
+  },
+  buttonTextOutline: {
+    color: Colors.accent,
+    fontWeight: 'bold',
+    fontSize: 18
   }
 })
+
 
 

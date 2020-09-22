@@ -1,13 +1,27 @@
 import React, { useState } from 'react';
 import { Button, StyleSheet, Text, View, TextInput, Image, Alert, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Colors from '../constants/colors';
-import Card from '../components/Card'
-
+import { Entypo } from '@expo/vector-icons';
 
 export default function Login({ navigation }) {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [password, setPassword] = useState('')
+  const [validNumber, setValidNumber] = useState(false)
+  const [isSecureText, setIsSecureText] = useState(true)
+  
+  const numberInputHandler = input => {
+    setPhoneNumber(input.replace(/[^0-9]/g, ''))
+    if (phoneNumber.length > 10) {
+      setValidNumber(true)
+    } else {
+      setValidNumber(false)
 
+    }
+  }
+
+  const changeSecureText = () => {
+    setIsSecureText(!isSecureText)
+  }
 
   return (
     <TouchableWithoutFeedback
@@ -16,33 +30,42 @@ export default function Login({ navigation }) {
       }}>
 
       <View style={styles.screen}>
-        <Card style={styles.formContainer}>
-          <Image
-            style={styles.fotoProfile}
-            source={{
-              uri:
-                'https://upload.wikimedia.org/wikipedia/commons/d/d3/User_Circle.png',
-            }}
-          />
-          <Text style={styles.title}>PHONE NUMBER</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={text => setPhoneNumber(text)}
-            value={phoneNumber}
-            placeholder="e.g. 082362097322"
-          />
-          <Text style={styles.title}>PASSWORD</Text>
-          <TextInput
-            style={styles.input}
-            onChangeText={text => setPassword(text)}
-            value={password}
-          />
-        </Card>
-        {/* <Button
-          onPress={() => Alert.alert('Simple Button pressed')}
-          title="Register"
-          accessibilityLabel="Learn more about this purple button"
-        /> */}
+        <View style={styles.header}>
+          <Text style={styles.textTitle}>Welcome !</Text>
+        </View>
+
+        <View style={styles.inputContainer}>
+          <View style={styles.inputFirst}>
+            <Entypo name="phone" size={24} color="black" />
+            <TextInput
+              style={styles.input}
+              keyboardType="number-pad"
+              onChangeText={input => numberInputHandler(input) }
+              value={phoneNumber}
+              placeholder="Phone Number"
+            />
+
+          </View>
+          <Entypo name="check" size={24} color={validNumber ? Colors.accent : '#d2d2d2'} />
+        </View>
+
+        <View style={styles.inputContainer}>
+          <View style={styles.inputFirst}>
+            <Entypo name="lock" size={24} color="black" />
+            <TextInput
+              style={styles.input}
+              secureTextEntry={isSecureText}
+              onChangeText={text => setPassword(text)}
+              value={password}
+              placeholder="Password"
+            />
+
+          </View>
+          <TouchableOpacity onPress={changeSecureText}>
+            <Entypo name={isSecureText? "eye-with-line" : "eye"} size={24} color="black" />
+
+          </TouchableOpacity>
+        </View>
         <TouchableOpacity
           style={styles.button}
           onPress={() => Alert.alert('Simple Button pressed')}
@@ -61,14 +84,35 @@ export default function Login({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  inputContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    alignItems: 'center',
+    padding: 10,
+    marginBottom: 20,
+    maxWidth: '90%',
+    borderBottomWidth:1,
+    borderBottomColor: Colors.accent
+  },
+  inputFirst: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
   screen: {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1
   },
+  header: {
+    marginVertical:20
+  },
+  textTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    
+  },
   formContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
     marginBottom: 20
   },
   fotoProfile: {
@@ -79,15 +123,10 @@ const styles = StyleSheet.create({
     marginTop: -90,
   },
   input: {
-    height: 40,
-    borderBottomColor: Colors.accent,
-    borderBottomWidth: 2,
-    textAlign: 'center',
     width: 300,
-    marginBottom: 20,
-    borderRadius: 10,
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: 'bold',
+    paddingHorizontal:10
   },
   button: {
     alignItems: "center",
@@ -95,7 +134,8 @@ const styles = StyleSheet.create({
     padding: 10,
     width: '80%',
     borderRadius: 20,
-    elevation: 8
+    elevation: 8,
+    marginTop: 30
   },
   buttonOutline: {
     alignItems: "center",
@@ -107,10 +147,14 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   buttonText: {
-    color: 'white'
+    color: 'white',
+    fontWeight: 'bold',
+    fontSize: 18
   },
-  buttonTextoutline: {
-    color: Colors.accent
+  buttonTextOutline: {
+    color: Colors.accent,
+    fontWeight: 'bold',
+    fontSize: 18
   }
 })
 

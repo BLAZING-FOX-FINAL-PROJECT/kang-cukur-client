@@ -6,14 +6,17 @@ import { Ionicons } from "react-native-vector-icons";
 
 import HomeScreen from "./screens/HomeScreen2";
 import OrderScreen from "./screens/OrderScreen";
-import HistoryScreen from "./screens/LoginScreen";
+import HistoryScreen from "./screens/HistoryScreen";
 import ProfileScreen from "./screens/ProfileScreen";
 
 const Tab = createBottomTabNavigator();
 
+// import RootStackScreen from './screens/RootStackScreen'
+
 export default function App() {
   return (
     <NavigationContainer>
+      {/* <RootStackScreen /> */}
       <Tab.Navigator
         screenOptions={({ route }) => ({
           tabBarIcon: ({ focused, color, size }) => {
@@ -40,4 +43,4 @@ export default function App() {
       </Tab.Navigator>
     </NavigationContainer>
   );
-
+}
