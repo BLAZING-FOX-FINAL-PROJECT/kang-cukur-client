@@ -43,7 +43,7 @@ export default function HomeScreen({ navigation }) {
   return (
     <View style={styles.container}>
       <Image
-        source={require("../assets/jumbotron.jpg")}
+        source={require("../assets/banner0.jpg")}
         style={styles.jumbotron}
       />
       <View style={styles.buttons}>

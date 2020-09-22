@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Button, StyleSheet, Text, View, TextInput, Image, Alert, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
+import React, { useEffect, useState, useCallback } from 'react';
+import { Button, StyleSheet, Text, View, TextInput, Image, Alert, TouchableOpacity, TouchableWithoutFeedback, Keyboard, AsyncStorage } from 'react-native';
 import Colors from '../constants/colors';
 import { Entypo } from '@expo/vector-icons';
 import { useSelector, useDispatch } from "react-redux";
@@ -12,7 +12,17 @@ export default function Login({ navigation }) {
   const [isSecureText, setIsSecureText] = useState(true)
   let access_token = useSelector((state) => state.access_token);
   let dispatch = useDispatch();
+  const [access, setAccess] = useState('')
 
+  const getName = useCallback(async () => {
+
+    setAccess(await AsyncStorage.getItem("access_token"));
+  }); 
+
+  useEffect(() => {
+    getName()
+    
+  }, [])
 
 
   // useEffect(() => {
@@ -42,12 +52,13 @@ export default function Login({ navigation }) {
     setPhoneNumber('')
     setPassword('')
   }
-
   let token
-  if (access_token) {
+  if (access) {
     token = (
       <View>
-        <Text>{access_token}</Text>
+        <Text>
+          {JSON.stringify(access, null, 2)}
+        </Text>
       </View>
     )
   }
@@ -62,7 +73,7 @@ export default function Login({ navigation }) {
         <View style={styles.header}>
           <Text style={styles.textTitle}>Welcome !</Text>
         </View>
-        {token}
+        {/* {token} */}
 
         <View style={styles.inputContainer}>
           <View style={styles.inputFirst}>

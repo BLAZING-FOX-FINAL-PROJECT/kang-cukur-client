@@ -8,9 +8,9 @@ import { Ionicons } from "react-native-vector-icons";
 import * as Permissions from "expo-permissions";
 
 import HomeScreen from "./screens/HomeScreen2";
-import OrderScreen from "./screens/OrderScreen";
+import OrderScreen from "./screens/LoginScreen";
 import LoginScreen from "./screens/LoginScreen";
-import HistoryScreen from "./screens/HistoryScreen";
+import HistoryScreen from "./screens/HistoryScreen2";
 import RegisterScreen from "./screens/RegisterScreen";
 
 import ProfileScreen from "./screens/ProfileScreen";
@@ -59,12 +59,18 @@ export default function App() {
             },
           })}
         >
-          <Tab.Screen name="Home" component={HomeScreen} />
-          <Tab.Screen name="Order" component={OrderScreen} />
+          <Tab.Screen name="Home" component={MainStackNavigator} />
           <Tab.Screen name="History" component={HistoryScreen} />
           <Tab.Screen name="Profile" component={ProfileScreen} />
+          <Tab.Screen name="Order" component={OrderScreen} />
         </Tab.Navigator>
-      </NavigationContainer>
+    </NavigationContainer>
+    </Provider>
+  );
+}
+
+
+{/* </NavigationContainer>
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
@@ -74,8 +80,4 @@ export default function App() {
         <Tab.Screen name="Order" component={OrderScreen} />
         <Tab.Screen name="History" component={HistoryScreen} />
         <Tab.Screen name="Profile" component={ProfileScreen} />
-      </Tab.Navigator>
-    </NavigationContainer>
-    </Provider>
-  );
-}
+      </Tab.Navigator> */}

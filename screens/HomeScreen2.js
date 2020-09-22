@@ -31,7 +31,7 @@ const dummyData = [
 
 
 
-const HomeScreen2 = () => {
+const HomeScreen2 = ({navigation}) => {
   return (
     <View style={StyleSheet.screen}>
       <View style={styles.carouselContainer}>
@@ -48,7 +48,11 @@ const HomeScreen2 = () => {
         <Card style={styles.card}>
           <TouchableOpacity
             style={styles.button}
-            onPress={() => Alert.alert('Simple Button pressed')}
+            onPress={() =>
+              navigation.navigate("VarianCukurScreen", {
+                screen: "VarianCukurScreen",
+              })
+            }
           >
             <View style={styles.iconContainer}>
               <FontAwesome5 name="motorcycle" size={60} color="white" />
