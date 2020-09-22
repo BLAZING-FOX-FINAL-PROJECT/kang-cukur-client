@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { Alert, Button, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
 import Colors from '../constants/colors'
 import Card from '../components/Card';
 import Header from '../components/Header';
@@ -13,7 +13,6 @@ export default function ProfileScreen({ navigation }) {
   const [showEdit, setShowEdit] = useState(false)
 
   const editProfile = (name, phoneNumber, address) => {
-    console.log(name)
     setName(name)
     setPhoneNumber(phoneNumber)
     setAddress(address)
