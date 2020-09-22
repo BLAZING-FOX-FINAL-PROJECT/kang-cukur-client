@@ -19,13 +19,18 @@ export default function OrderScreen({ navigation }) {
     { name: "kang cukur 1", status: "completed", tanggal: "202020" },
     { name: "kang cukur 2", status: "canceled", tanggal: "212121" },
     { name: "kang cukur 3", status: "canceled", tanggal: "212121" },
-    { name: "kang cukur 1", status: "completed", tanggal: "202020" },
-    { name: "kang cukur 2", status: "canceled", tanggal: "212121" },
-    { name: "kang cukur 3", status: "canceled", tanggal: "222222" },
-    { name: "kang cukur 1", status: "completed", tanggal: "202020" },
+    { name: "kang cukur 4", status: "completed", tanggal: "202020" },
+    { name: "kang cukur 5", status: "canceled", tanggal: "212121" },
+    { name: "kang cukur 6", status: "canceled", tanggal: "222222" },
+    { name: "kang cukur 7", status: "completed", tanggal: "202020" },
   ];
 
+  
+
+  
+
   return (
+
     <View style={styles.container}>
       <View style={{ width: windowWidth, flex: 2 }}>
         <Header title="Order History" />

@@ -7,12 +7,20 @@ import { Ionicons } from "react-native-vector-icons";
 
 import * as Permissions from "expo-permissions";
 
+import HomeScreen from "./screens/HomeScreen2";
 import OrderScreen from "./screens/OrderScreen";
+import LoginScreen from "./screens/LoginScreen";
 import HistoryScreen from "./screens/HistoryScreen";
+import RegisterScreen from "./screens/RegisterScreen";
+
 import ProfileScreen from "./screens/ProfileScreen";
 import { MainStackNavigator } from "./navigation/StackNavigator";
 
 const Tab = createBottomTabNavigator();
+import { Provider } from 'react-redux';
+import store from "./store/";
+
+// import RootStackScreen from './screens/RootStackScreen'
 
 export default function App() {
   useEffect(() => {
@@ -29,21 +37,34 @@ export default function App() {
   };
 
   return (
-    <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({ route }) => ({
-          tabBarIcon: ({ focused, color, size }) => {
-            let iconName;
+    <Provider store={store}>
+      <NavigationContainer>
+        {/* <RootStackScreen /> */}
+        <Tab.Navigator
+          screenOptions={({ route }) => ({
+            tabBarIcon: ({ focused, color, size }) => {
+              let iconName;
 
-            if (route.name === "Home") {
-              iconName = "md-home";
-            } else if (route.name === "Order") {
-              iconName = "md-list";
-            } else if (route.name === "History") {
-              iconName = "md-time";
-            } else if (route.name === "Profile") {
-              iconName = "md-contact";
-            }
+              if (route.name === "Home") {
+                iconName = "md-home";
+              } else if (route.name === "Order") {
+                iconName = "md-list";
+              } else if (route.name === "History") {
+                iconName = "md-time";
+              } else if (route.name === "Profile") {
+                iconName = "md-contact";
+              }
+
+              return <Ionicons name={iconName} size={size} color={color} />;
+            },
+          })}
+        >
+          <Tab.Screen name="Home" component={HomeScreen} />
+          <Tab.Screen name="Order" component={OrderScreen} />
+          <Tab.Screen name="History" component={HistoryScreen} />
+          <Tab.Screen name="Profile" component={ProfileScreen} />
+        </Tab.Navigator>
+      </NavigationContainer>
 
             return <Ionicons name={iconName} size={size} color={color} />;
           },
@@ -55,5 +76,6 @@ export default function App() {
         <Tab.Screen name="Profile" component={ProfileScreen} />
       </Tab.Navigator>
     </NavigationContainer>
+    </Provider>
   );
 }
