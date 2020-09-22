@@ -1,70 +1,146 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import {
   StyleSheet,
-  Text,
   View,
-  Image,
+  FlatList,
+  ActivityIndicator,
   Dimensions,
   TouchableOpacity,
+  Text
 } from "react-native";
+import OrderCards from "../components/OrderCards2";
+// import DetailsCard from "../components/DetailsCard";
+import Header from "../components/Header";
+import Colors from "../constants/colors";
 
-export default function HomeScreen({ navigation }) {
+export default function OrderScreen({ navigation }) {
   const windowWidth = Dimensions.get("window").width;
   const windowHeight = Dimensions.get("window").height;
-  const styles = StyleSheet.create({
-    container: {
-      flex: 6,
-      backgroundColor: "#fff",
-      alignItems: "center",
-      justifyContent: "center",
-    },
-    jumbotron: {
-      width: windowWidth,
-      height: 200,
-      flex: 2,
-    },
-    buttons: {
-      flex: 4,
-      shadowColor: "#000",
-      shadowOffset: {
-        width: 0,
-        height: 8,
-      },
-      shadowOpacity: 0.44,
-      shadowRadius: 10.32,
-    },
-    pil: {
-      aspectRatio: 1.3,
-      resizeMode: "contain",
-    },
-  });
+  const [completed, setCompleted] = useState(true)
+
+
+  const sample = [
+    { name: "kang cukur 1", status: "completed", tanggal: "202020", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 2", status: "canceled", tanggal: "212121", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 3", status: "canceled", tanggal: "212121", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 4", status: "completed", tanggal: "202020", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 5", status: "canceled", tanggal: "212121", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 6", status: "canceled", tanggal: "222222", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 7", status: "completed", tanggal: "202020", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 1", status: "completed", tanggal: "202020", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 2", status: "canceled", tanggal: "212121", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 3", status: "canceled", tanggal: "212121", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 4", status: "completed", tanggal: "202020", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 5", status: "canceled", tanggal: "212121", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 6", status: "canceled", tanggal: "222222", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 7", status: "completed", tanggal: "202020", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 7", status: "completed", tanggal: "202020", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 7", status: "completed", tanggal: "202020", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 7", status: "completed", tanggal: "202020", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 7", status: "completed", tanggal: "202020", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+    { name: "kang cukur 7", status: "completed", tanggal: "202020", rating: "4.5", customer: "kang cukur 1", info: "Service Rambut" },
+  ];
+
+  let dataCompleted = sample.filter((e) => {
+    return e.status === 'completed'
+  })
+  let dataCanceled = sample.filter((e) => {
+    return e.status === 'canceled'
+  })
+
+  const canceledHandler = () => {
+    setCompleted(false)
+  }
+
+  const completedHandler = () => {
+    setCompleted(true)
+  }
+
 
   return (
+
     <View style={styles.container}>
-      <Image
-        source={require("../assets/banner0.jpg")}
-        style={styles.jumbotron}
-      />
-      <View style={styles.buttons}>
+      <Header style={{ flex: 1 }} title="Order History" />
+      <View style={styles.btnHeaderContainer}>
         <TouchableOpacity
-          onPress={() =>
-            navigation.navigate("VarianCukurScreen", {
-              screen: "VarianCukurScreen",
-            })
-          }
+          style={completed ? styles.button : styles.buttonOutline}
+          onPress={() => completedHandler()}
         >
-          <Image
-            source={require("../assets/cukur-on-delivery-pil-edited.png")}
-            style={styles.pil}
-          />
+          <Text style={completed ? styles.buttonText : styles.buttonTextOutline}>Completed</Text>
         </TouchableOpacity>
-        <Image
-          source={require("../assets/cukur-on-barber-pil-edited.png")}
-          style={styles.pil}
+        <TouchableOpacity
+          style={completed ? styles.buttonOutline : styles.button}
+          onPress={() => canceledHandler()}
+        >
+          <Text style={completed ? styles.buttonTextOutline : styles.buttonText}>Canceled</Text>
+        </TouchableOpacity>
+      </View>
+      <View style={styles.listContainer}>
+
+        <FlatList
+          data={completed ? dataCompleted : dataCanceled}
+          renderItem={({ item, index }) => {
+            return <OrderCards item={item} index={index} />;
+          }}
+          keyExtractor={(item, index) => `${index}`}
         />
       </View>
-      <StatusBar style="auto" />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  btnHeaderContainer: {
+    flexDirection: 'row',
+    width: '100%',
+
+  },
+  container: {
+    backgroundColor: Colors.base1,
+    alignItems: "center",
+    color: Colors.color1,
+    backgroundColor: Colors.base2,
+    marginBottom: 200
+  },
+  button: {
+    width: '50%',
+    borderBottomWidth: 6,
+
+    borderColor: Colors.accent,
+    alignItems: "center",
+    // backgroundColor: Colors.accent,
+    padding: 10,
+    // width: 120,
+    // borderRadius: 20,
+    // elevation: 8,
+    // marginHorizontal:15
+  },
+  buttonOutline: {
+    width: '50%',
+    borderBottomWidth: 6,
+    borderColor: Colors.base1,
+
+    alignItems: "center",
+    paddingVertical: 10,
+    // width: 120,
+    // borderRadius: 20,
+    // marginTop: 0,
+  },
+  buttonText: {
+    fontWeight: 'bold',
+    fontSize: 18,
+    color: Colors.accent,
+  },
+  buttonTextOutline: {
+    color: Colors.color1,
+
+    // fontWeight: 'bold',
+
+    fontSize: 18
+  },
+  listContainer: {
+    width: '100%',
+
+  }
+});

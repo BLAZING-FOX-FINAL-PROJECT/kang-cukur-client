@@ -17,24 +17,29 @@ export default function OrderCards({ item }) {
 
   return (
     <TouchableOpacity onPress={toggleDetail}>
-      <View style={styles.card}>
-        <Image
-          style={styles.fotoProfile}
-          source={{
-            uri:
-              "https://images.unsplash.com/photo-1520338661084-680395057c93?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
-          }}
-        />
-        <View style={styles.text}>
-          <Text style={styles.title}>{customer}</Text>
-          <Text style={styles.info}>{info}</Text>
-          <View style={styles.ratingContainer}>
-            <FontAwesome name="star" size={24} color={Colors.accent} />
-            <Text style={styles.rating}>{rating}</Text>
+      <View style={styles.cardContainer}>
+        <View style={styles.card}>
+          <Image
+            style={styles.fotoProfile}
+            source={{
+              uri:
+                "https://images.unsplash.com/photo-1520338661084-680395057c93?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=750&q=80",
+            }}
+          />
+          <View style={styles.text}>
+            <Text style={styles.title}>{customer}</Text>
+            <Text style={styles.info}>{info}</Text>
+            {/* <View style={styles.ratingContainer}>
+              <FontAwesome name="star" size={24} color={Colors.accent} />
+              <Text style={styles.rating}>{rating}</Text>
+            </View> */}
           </View>
         </View>
+        <View style={styles.btnDetail}>
+          <Text style={styles.textLink}>Detail</Text>
+        </View>
       </View>
-      <View style={{ flexDirection: "column", marginTop: 20 }}>
+      {/* <View style={{ flexDirection: "column", marginTop: 20 }}>
         {showDetail &&
           <FlatList
             data={dummyData}
@@ -44,28 +49,38 @@ export default function OrderCards({ item }) {
             keyExtractor={(item, index) => `${index}`}
           />
         }
-      </View>
-
+      </View> */}
+      
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
+  textLink: {
+    fontWeight:'bold',
+    color: Colors.accent
+  },
   fotoProfile: {
     borderRadius: 30,
     width: 60,
     height: 60,
   },
+  cardContainer: {
+    flexDirection: "row",
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    backgroundColor: Colors.base1,
+    paddingHorizontal: 20,
+    paddingVertical: 20
+  },
   card: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    padding: 10,
-    borderBottomWidth: 1
     
   },
   text: {
-    marginLeft:10
+    marginLeft:20
   },
   title: {
     fontSize: 18,

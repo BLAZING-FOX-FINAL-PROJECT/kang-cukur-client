@@ -8,7 +8,7 @@ import { Ionicons } from "react-native-vector-icons";
 import * as Permissions from "expo-permissions";
 
 import HomeScreen from "./screens/HomeScreen2";
-import OrderScreen from "./screens/LoginScreen";
+import OrderScreen from "./screens/RegisterScreen";
 import LoginScreen from "./screens/LoginScreen";
 import HistoryScreen from "./screens/HistoryScreen2";
 import RegisterScreen from "./screens/RegisterScreen";
