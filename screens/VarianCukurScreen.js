@@ -20,18 +20,23 @@ export default function VarianCukurScreen() {
 
   // {customerLatitude, customerLongitude, servis: [{jenisCukur: 'string', hargaCukur: int, jumlah: int}]}
 
-  let latitudeNow;
-  let longitudeNow;
   useEffect(() => {
-    navigator.geolocation.getCurrentPosition(
-      ({ coords: { latitude, longitude } }) => {
-        latitudeNow = latitude;
-        longitudeNow = longitude
-        setCustomerLatitude(latitude);
-        setCustomerLongitude(longitude);
-      },
-      (error) => console.log("error getCurr:", error)
-    );
+    const geoInterval = setInterval(() => {
+      navigator.geolocation.getCurrentPosition(
+        ({ coords: { latitude, longitude } }) => {
+          if (latitude) {
+            setCustomerLatitude(latitude);
+          }
+          if (longitude) {
+            setCustomerLongitude(longitude);
+          }
+        },
+        (error) => console.log("error getCurr:", error)
+      );
+    }, 3000);
+    return () => {
+      clearInterval(geoInterval);
+    };
   }, []);
 
   const styles = StyleSheet.create({
