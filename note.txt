@@ -126,3 +126,7 @@ animation="fadeInUpBig"
 React native Linear Gradient
 
 Toucable opactity, linear gradient, text
+==========================
+
+Sedang memotong,
+Feedback
