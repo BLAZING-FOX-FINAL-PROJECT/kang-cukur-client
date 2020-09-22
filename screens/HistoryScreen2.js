@@ -62,7 +62,7 @@ export default function OrderScreen({ navigation }) {
 
     <View style={styles.container}>
       <Header style={{flex:1}} title="Order History" />
-      <View style={{flexDirection: 'row', marginVertical: 20, alignItems:'center' }}>
+      <View style={styles.btnHeaderContainer}>
         <TouchableOpacity
           style={completed ? styles.button : styles.buttonOutline}
           onPress={() => completedHandler()}
@@ -91,42 +91,55 @@ export default function OrderScreen({ navigation }) {
 }
 
 const styles = StyleSheet.create({
+  btnHeaderContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    
+  },
   container: {
     backgroundColor: Colors.base1,
     alignItems: "center",
     color: Colors.color1,
     backgroundColor: Colors.base2,
-    marginBottom:200
+    marginBottom: 240
   },
   button: {
+    width: '50%',
+    borderBottomWidth: 6,
+
+    borderColor: Colors.accent,
     alignItems: "center",
-    backgroundColor: Colors.accent,
+    // backgroundColor: Colors.accent,
     padding: 10,
-    width: 120,
-    borderRadius: 20,
-    elevation: 8,
-    marginHorizontal:15
+    // width: 120,
+    // borderRadius: 20,
+    // elevation: 8,
+    // marginHorizontal:15
   },
   buttonOutline: {
+    width: '50%',
+    borderBottomWidth: 6,
+    borderColor:Colors.base1,
+
     alignItems: "center",
-    padding: 10,
-    width: 120,
-    borderRadius: 20,
-    marginTop: 0,
+    paddingVertical: 10,
+    // width: 120,
+    // borderRadius: 20,
+    // marginTop: 0,
   },
   buttonText: {
-    color: 'white',
     fontWeight: 'bold',
-    fontSize: 18
+    fontSize: 18,
+    color: Colors.accent,
   },
   buttonTextOutline: {
     color: Colors.color1,
-    fontWeight: 'bold',
+
+    // fontWeight: 'bold',
 
     fontSize: 18
   },
   listContainer: {
-    width: '80%',
-    
+    width: '100%',
   }
 });

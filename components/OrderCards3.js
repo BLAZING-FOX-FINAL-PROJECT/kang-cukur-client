@@ -6,9 +6,9 @@ import DetailsCard from "./DetailsCard";
 import dummyData from '../dummyData.json'
 import { FontAwesome } from '@expo/vector-icons';
 
-export default function OrderCards({ item }) {
+export default function OrderCards3({ item }) {
   const [showDetail, setShowDetail] = useState(false);
-  const { customer, info, rating} = item
+  const { customer, info, rating } = item
 
 
   const toggleDetail = () => {
@@ -50,14 +50,14 @@ export default function OrderCards({ item }) {
           />
         }
       </View> */}
-      
+
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   textLink: {
-    fontWeight:'bold',
+    fontWeight: 'bold',
     color: Colors.accent
   },
   fotoProfile: {
@@ -70,32 +70,35 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     backgroundColor: Colors.base1,
-    paddingHorizontal: 20,
-    paddingVertical: 20
+    marginHorizontal: 10,
+    marginBottom: 10,
+    padding: 10,
+    borderRadius: 20
+    
   },
   card: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    
+
   },
   text: {
-    marginLeft:20
+    marginLeft: 20
   },
   title: {
     fontSize: 18,
     textTransform: 'capitalize',
-    fontWeight:'bold'
+    fontWeight: 'bold'
   },
   info: {
-    fontSize:14
+    fontSize: 14
   },
   rating: {
-    fontSize:18,
-    marginLeft:10
+    fontSize: 18,
+    marginLeft: 10
   },
   ratingContainer: {
-    marginTop:5,
+    marginTop: 5,
     flexDirection: 'row'
   }
 
