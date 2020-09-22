@@ -1,20 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Ionicons } from "react-native-vector-icons";
 
-import HomeScreen from "./screens/HomeScreen";
+import * as Permissions from "expo-permissions";
+
 import OrderScreen from "./screens/OrderScreen";
 import HistoryScreen from "./screens/HistoryScreen";
 import ProfileScreen from "./screens/ProfileScreen";
-import VarianCukurScreen from "./screens/VarianCukurScreen";
 import { MainStackNavigator } from "./navigation/StackNavigator";
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
+  useEffect(() => {
+    getLocationPermission();
+  }, []);
+
+  const getLocationPermission = async () => {
+    const { status } = await Permissions.getAsync(Permissions.LOCATION);
+    console.log(status, "status");
+    if (status !== "granted") {
+      const response = await Permissions.askAsync(Permissions.LOCATION);
+      console.log(response, "respone");
+    }
+  };
+
   return (
     <NavigationContainer>
       <Tab.Navigator
