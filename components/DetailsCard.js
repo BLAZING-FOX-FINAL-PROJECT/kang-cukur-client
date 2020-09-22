@@ -25,7 +25,7 @@ export default function DetailsCard({ navigation, item }) {
       </View>
       <View style={styles.footer}>
         <Text style={{ fontSize: 12, color: Colors.base2 }}>
-          Tap card to continue
+          Tap card to close
         </Text>
       </View>
     </View>

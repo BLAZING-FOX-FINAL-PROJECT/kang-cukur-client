@@ -1,6 +1,13 @@
 import { StatusBar } from "expo-status-bar";
 import React from "react";
-import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  Dimensions,
+  TouchableOpacity,
+} from "react-native";
 
 export default function HomeScreen({ navigation }) {
   const windowWidth = Dimensions.get("window").width;
@@ -40,10 +47,18 @@ export default function HomeScreen({ navigation }) {
         style={styles.jumbotron}
       />
       <View style={styles.buttons}>
-        <Image
-          source={require("../assets/cukur-on-delivery-pil-edited.png")}
-          style={styles.pil}
-        />
+        <TouchableOpacity
+          onPress={() =>
+            navigation.navigate("VarianCukurScreen", {
+              screen: "VarianCukurScreen",
+            })
+          }
+        >
+          <Image
+            source={require("../assets/cukur-on-delivery-pil-edited.png")}
+            style={styles.pil}
+          />
+        </TouchableOpacity>
         <Image
           source={require("../assets/cukur-on-barber-pil-edited.png")}
           style={styles.pil}
