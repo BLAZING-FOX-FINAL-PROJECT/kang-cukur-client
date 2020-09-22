@@ -13,6 +13,7 @@ import Colors from "../constants/colors";
 import VarianList from "../components/VarianList";
 import { FontAwesome } from "react-native-vector-icons";
 import {postTransactionCustom} from "../store/action/index"
+import axios from "axios"
 
 
 export default function VarianCukurScreen({navigation}) {
@@ -134,42 +135,18 @@ export default function VarianCukurScreen({navigation}) {
   };
 
   const postCukurNow = async () => {
-      console.log(customerLatitude,
-        customerLongitude,
-        servis,'disini cuy')
-
     const access =  await AsyncStorage.getItem("access_token")
     console.log(access)
     if(!customerLatitude || !customerLongitude || !servis.length) {
       console.log("Nooo")
     } else {
-      const url = 'https://tukangcukur.herokuapp.com/transaksi/'
-      const myRequest = new Request(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'access_token':access
-        },
-        body: JSON.stringify({
-          customerLatitude,
-          customerLongitude,
-          servis
-        })
-      });
-      fetch(myRequest)
-      // .then((resp) => resp.json())
-      .then(() =>{
-        // dispatch()
-        navigation.navigate("Order")
-      })
-      .catch(console.log)
-
-      // dispatch(postTransactionCustom({
-      //   access_token:access,
-      //   customerLatitude,
-      //   customerLongitude,
-      //   servis
-      // }))
+      dispatch(postTransactionCustom({
+        access_token:access,
+        customerLatitude,
+        customerLongitude,
+        servis
+      }))
+      navigation.navigate("Order")
     }
 
   }

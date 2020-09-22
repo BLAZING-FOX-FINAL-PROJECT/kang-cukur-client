@@ -17,18 +17,18 @@ export default function Login({ navigation }) {
   const getName = useCallback(async () => {
 
     setAccess(await AsyncStorage.getItem("access_token"));
-  }); 
+  });
 
   useEffect(() => {
     getName()
-    
+
   }, [])
 
 
   // useEffect(() => {
   //   dispatch(postLogin({telepon, password}));
   // }, [dispatch]);
-  
+
   const numberInputHandler = input => {
     setPhoneNumber(input.replace(/[^0-9]/g, ''))
     if (phoneNumber.length > 10) {
@@ -113,12 +113,12 @@ export default function Login({ navigation }) {
         >
           <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {null && <TouchableOpacity
           style={styles.buttonOutline}
           onPress={() => loginHandler()}
         >
           <Text style={styles.buttonTextOutline}>Register</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
   textTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    
+
   },
   formContainer: {
     marginBottom: 20
