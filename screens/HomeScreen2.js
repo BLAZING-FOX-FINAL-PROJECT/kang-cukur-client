@@ -39,7 +39,7 @@ const HomeScreen2 = ({navigation}) => {
 
       </View>
       <View style={styles.groupTitle}>
-        
+
         <Text style={styles.textTitle}>Choose Your Service</Text>
 
       </View>
@@ -61,7 +61,7 @@ const HomeScreen2 = ({navigation}) => {
             <Text style={styles.buttonText}>CUKUR ON DELIVERY</Text>
             <MaterialIcons name="navigate-next" size={30} color="white" />
           </TouchableOpacity>
-          
+
           <TouchableOpacity
             style={styles.button}
             onPress={() => Alert.alert('Simple Button pressed')}

@@ -8,12 +8,12 @@ import { Ionicons } from "react-native-vector-icons";
 import * as Permissions from "expo-permissions";
 
 import HomeScreen from "./screens/HomeScreen2";
-import OrderScreen from "./screens/LoginScreen";
+import OrderScreen from "./screens/MapsScreen";
 import LoginScreen from "./screens/LoginScreen";
 import HistoryScreen from "./screens/HistoryScreen2";
 import RegisterScreen from "./screens/RegisterScreen";
 
-import ProfileScreen from "./screens/ProfileScreen";
+import ProfileScreen from "./screens/LoginScreen";
 import { MainStackNavigator } from "./navigation/StackNavigator";
 
 const Tab = createBottomTabNavigator();
@@ -60,9 +60,9 @@ export default function App() {
           })}
         >
           <Tab.Screen name="Home" component={MainStackNavigator} />
+          <Tab.Screen name="Order" component={OrderScreen} />
           <Tab.Screen name="History" component={HistoryScreen} />
           <Tab.Screen name="Profile" component={ProfileScreen} />
-          <Tab.Screen name="Order" component={OrderScreen} />
         </Tab.Navigator>
     </NavigationContainer>
     </Provider>

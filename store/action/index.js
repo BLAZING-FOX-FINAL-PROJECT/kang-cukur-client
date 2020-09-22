@@ -1,4 +1,5 @@
 import { AsyncStorage } from 'react-native';
+import { useCallback } from 'react';
 
 
 export function postLogin(payload) {
@@ -42,8 +43,8 @@ export function postLogin(payload) {
     } catch (err) {
       console.log(err)
     }
-    
-    
+
+
   }
 }
 
@@ -71,24 +72,53 @@ export function postRegister(payload) {
   }
 }
 
-export function getOngoingTransaction() {
+export function getOngoingTransaction(payload) {
   return (dispatch, getState) => {
-    console.log('on going transaction')
+    // console.log('on going transaction')
 
-    let url = ''
-    const myHeaders = ''
+    const url = 'https://tukangcukur.herokuapp.com/transaksi/ongoing'
     const myRequest = new Request(url, {
       method: 'GET',
-      headers: myHeaders ,
-      mode: 'cors',
-      cache: 'default',
+      headers: {
+        'Content-Type': 'application/json',
+        'access_token':payload
+      }
     });
-
     fetch(myRequest)
-      .then(response => response.blob())
+      .then(response => response.json())
       .then(myBlob => {
-        myImage.src = URL.createObjectURL(myBlob);
-      });
+        // console.log(myBlob,'disini')
+        dispatch({
+          type: 'SET_ONGOING_TRANSACTION',
+          payload: myBlob
+        })
+      })
+      .catch(console.log)
   }
 }
+
+export async function postTransactionCustom(payload) {
+  const data = { customerLatitude: payload.customerLatitude, customerLongitude: payload.customerLongitude, servis: payload.servis}
+  console.log(data,'data cuy')
+  return (dispatch, getState) => {
+    const url = 'https://tukangcukur.herokuapp.com/transaksi/'
+    const myRequest = new Request(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'access_token':payload.access_token
+      },
+      body: JSON.stringify(data)
+    });
+    fetch(myRequest)
+      .then((resp) => resp.json())
+      .then((data) =>{
+        // dispatch()
+      })
+      .catch(console.log)
+  }
+}
+
+
+
 
