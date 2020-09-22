@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { Button, StyleSheet, Text, View, TextInput, Image, Alert, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Colors from '../constants/colors';
-import Card from '../components/Card'
 import { Entypo, MaterialIcons } from '@expo/vector-icons';
+import { useSelector, useDispatch } from "react-redux";
+import { postRegister } from '../store/action/index'
 
 
 export default function Register({ navigation }) {
@@ -15,6 +16,8 @@ export default function Register({ navigation }) {
   const [validAddress, setValidAddress] = useState(false)
 
   const [isSecureText, setIsSecureText] = useState(true)
+  let dispatch = useDispatch();
+
 
   const numberInputHandler = input => {
     setPhoneNumber(input.replace(/[^0-9]/g, ''))
@@ -59,6 +62,13 @@ export default function Register({ navigation }) {
   }
 
   const onRegisterHandler = () => {
+    const payload = {
+      name,
+      address,
+      phoneNumber,
+      password,
+    }
+    dispatch(postRegister(payload))
     setName('')
     setAddress('')
     setPhoneNumber('')

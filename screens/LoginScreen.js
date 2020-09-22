@@ -2,12 +2,22 @@ import React, { useState } from 'react';
 import { Button, StyleSheet, Text, View, TextInput, Image, Alert, TouchableOpacity, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Colors from '../constants/colors';
 import { Entypo } from '@expo/vector-icons';
+import { useSelector, useDispatch } from "react-redux";
+import {postLogin} from '../store/action/index'
 
 export default function Login({ navigation }) {
   const [phoneNumber, setPhoneNumber] = useState('')
   const [password, setPassword] = useState('')
   const [validNumber, setValidNumber] = useState(false)
   const [isSecureText, setIsSecureText] = useState(true)
+  let access_token = useSelector((state) => state.access_token);
+  let dispatch = useDispatch();
+
+
+
+  // useEffect(() => {
+  //   dispatch(postLogin({telepon, password}));
+  // }, [dispatch]);
   
   const numberInputHandler = input => {
     setPhoneNumber(input.replace(/[^0-9]/g, ''))
@@ -23,6 +33,25 @@ export default function Login({ navigation }) {
     setIsSecureText(!isSecureText)
   }
 
+  const loginHandler = () => {
+    const payload = {
+      phoneNumber,
+      password
+    }
+    dispatch(postLogin(payload));
+    setPhoneNumber('')
+    setPassword('')
+  }
+
+  let token
+  if (access_token) {
+    token = (
+      <View>
+        <Text>{access_token}</Text>
+      </View>
+    )
+  }
+
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -33,6 +62,7 @@ export default function Login({ navigation }) {
         <View style={styles.header}>
           <Text style={styles.textTitle}>Welcome !</Text>
         </View>
+        {token}
 
         <View style={styles.inputContainer}>
           <View style={styles.inputFirst}>
@@ -68,13 +98,13 @@ export default function Login({ navigation }) {
         </View>
         <TouchableOpacity
           style={styles.button}
-          onPress={() => Alert.alert('Simple Button pressed')}
+          onPress={() => loginHandler()}
         >
           <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.buttonOutline}
-          onPress={() => Alert.alert('Simple Button pressed')}
+          onPress={() => loginHandler()}
         >
           <Text style={styles.buttonTextOutline}>Register</Text>
         </TouchableOpacity>
