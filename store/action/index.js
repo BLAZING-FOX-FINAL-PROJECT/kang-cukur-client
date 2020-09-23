@@ -1,5 +1,6 @@
 import { AsyncStorage } from 'react-native';
 import { useCallback } from 'react';
+import axios from 'axios';
 
 
 export function postLogin(payload) {
@@ -74,48 +75,45 @@ export function postRegister(payload) {
 
 export function getOngoingTransaction(payload) {
   return (dispatch, getState) => {
-    // console.log('on going transaction')
-
-    const url = 'https://tukangcukur.herokuapp.com/transaksi/ongoing'
-    const myRequest = new Request(url, {
-      method: 'GET',
+    axios({
+      url:'https://tukangcukur.herokuapp.com/transaksi/ongoing',
+      method: "GET",
       headers: {
-        'Content-Type': 'application/json',
         'access_token':payload
-      }
-    });
-    fetch(myRequest)
-      .then(response => response.json())
-      .then(myBlob => {
-        // console.log(myBlob,'disini')
-        dispatch({
-          type: 'SET_ONGOING_TRANSACTION',
-          payload: myBlob
-        })
+      },
+    }).then(({data}) => {
+      dispatch({
+        type: 'SET_ONGOING_TRANSACTION',
+        payload: data
       })
-      .catch(console.log)
+    })
+    .catch(console.log)
   }
 }
 
 export async function postTransactionCustom(payload) {
   const data = { customerLatitude: payload.customerLatitude, customerLongitude: payload.customerLongitude, servis: payload.servis}
-  console.log(data,'data cuy')
   return (dispatch, getState) => {
-    const url = 'https://tukangcukur.herokuapp.com/transaksi/'
-    const myRequest = new Request(url, {
-      method: 'POST',
+    axios({
+      url:"https://tukangcukur.herokuapp.com/transaksi/",
+      method: "POST",
       headers: {
-        'Content-Type': 'application/json',
-        'access_token':payload.access_token
+        'access_token':access
       },
-      body: JSON.stringify(data)
-    });
-    fetch(myRequest)
-      .then((resp) => resp.json())
-      .then((data) =>{
-        // dispatch()
-      })
-      .catch(console.log)
+      data: {
+        customerLatitude,
+        customerLongitude,
+        servis
+      }
+    }).then(({data}) =>{
+      console.log(data)
+      console.log(customerLatitude, customerLongitude, servis,'disini cuy')
+      // dispatch({
+      //   type:'SET_ONGOING_TRANSACTION',
+      //   payload: data
+      // })
+    })
+    .catch(console.log)
   }
 }
 

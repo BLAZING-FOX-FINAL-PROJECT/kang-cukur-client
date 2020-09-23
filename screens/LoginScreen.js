@@ -17,15 +17,17 @@ export default function Login({ navigation }) {
   const getName = useCallback(async () => {
 
     setAccess(await AsyncStorage.getItem("access_token"));
+
   }); 
   const [isEnabled, setIsEnabled] = useState(false);
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
 
+
   useEffect(() => {
     getName()
-    
+
   }, [])
-  
+
   const numberInputHandler = input => {
     setPhoneNumber(input.replace(/[^0-9]/g, ''))
     if (phoneNumber.length > 10) {
@@ -131,12 +133,12 @@ export default function Login({ navigation }) {
         >
           <Text style={styles.buttonText}>LOGIN</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {null && <TouchableOpacity
           style={styles.buttonOutline}
           onPress={() => goRegister()}
         >
           <Text style={styles.buttonTextOutline}>Register</Text>
-        </TouchableOpacity>
+        </TouchableOpacity>}
       </View>
     </TouchableWithoutFeedback>
   );
@@ -169,7 +171,7 @@ const styles = StyleSheet.create({
   textTitle: {
     fontSize: 24,
     fontWeight: 'bold',
-    
+
   },
   formContainer: {
     marginBottom: 20

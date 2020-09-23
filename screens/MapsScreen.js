@@ -15,6 +15,7 @@ export default function MapsScreen({ navigation }) {
 
   useEffect(() => {
     accessToken()
+    console.log(access, 'disini')
     dispatch(getOngoingTransaction(access))
   },[])
 

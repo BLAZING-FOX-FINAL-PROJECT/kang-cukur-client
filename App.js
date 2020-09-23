@@ -7,18 +7,18 @@ import { Ionicons } from "react-native-vector-icons";
 
 import * as Permissions from "expo-permissions";
 
-import HomeScreen from "./screens/HomeScreen2";
+// import HomeScreen from "./screens/HomeScreen2";
 
 // import OrderScreen from "./screens/MapsScreen";
-import LoginScreen from "./screens/LoginScreen";
-import HistoryScreen from "./screens/NoOrder";
-import RegisterScreen from "./screens/RegisterScreen";
+// import LoginScreen from "./screens/LoginScreen";
+// import RegisterScreen from "./screens/RegisterScreen";
+import HistoryScreen from "./screens/HistoryScreen2";
 
+import { MainStackNavigator } from "./navigation/StackNavigator";
+import MapsScreen from "./screens/MapsScreen";
 import ProfileScreen from "./screens/LoginScreen";
-import FindDriver from "./screens/FindDriver";
-import OrderScreen from "./screens/FindDriver";
+import HistoryScreen from "./screens/HistoryScreen2";
 
-import { MainStackNavigator, ProfileStackNavigator } from "./navigation/StackNavigator";
 
 const Tab = createBottomTabNavigator();
 import { Provider } from 'react-redux';
@@ -64,7 +64,7 @@ export default function App() {
           })}
         >
           <Tab.Screen name="Home" component={MainStackNavigator} />
-          <Tab.Screen name="Order" component={OrderScreen} />
+          <Tab.Screen name="Order" component={MapsScreen} />
           <Tab.Screen name="History" component={HistoryScreen} />
           <Tab.Screen name="Profile" component={ProfileStackNavigator} />
         </Tab.Navigator>

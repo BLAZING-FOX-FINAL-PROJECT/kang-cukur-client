@@ -2,9 +2,16 @@ import React, { useEffect, useCallback, useState } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { AsyncStorage } from 'react-native'
 
+
+// import HomeScreen from "../screens/HomeScreen";
+import HomeScreen from "../screens/Message";
+
+// import HomeScreen from "../screens/HomeScreen3";
+
 import HomeScreen from "../screens/HomeScreen3";
 import HomeScreen2 from "../screens/HomeScreen2";
-import FailedFindDriverScreen from "../screens/FailedFindDriver"
+// import FailedFindDriverScreen from "../screens/FailedFindDriver"
+
 
 import VarianCukurScreen from "../screens/VarianCukurScreen";
 import RegisterScreen from "../screens/RegisterScreen"
@@ -23,14 +30,14 @@ const screenOptionStyle = {
 
 const MainStackNavigator = () => {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
-        name="FiledFindDriver"
-        component={FailedFindDriverScreen}
-        options={{
-          headerShown: false,
-        }}
-      />
+//     <Stack.Navigator>
+//       <Stack.Screen
+//         name="FiledFindDriver"
+//         component={FailedFindDriverScreen}
+//         options={{
+//           headerShown: false,
+//         }}
+//       />
       {/* <Stack.Screen
         name="Home2"
         component={HomeScreen2}
