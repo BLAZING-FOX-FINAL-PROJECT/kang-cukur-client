@@ -14,7 +14,7 @@ const reducers = (state = initialState, action) => {
     // case 'SET_ACCESS_TOKEN':
     //   return { ...accessToken, access_token: action.payload.access_token }
     case 'SET_ONGOING_TRANSACTION':
-      // console.log(action.payload, 'di reducerss')
+      console.log(action.payload, 'di reducerss')
       return { ...state, ongoingTransaction: action.payload }
     default:
       return state

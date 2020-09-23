@@ -31,9 +31,9 @@ export default function OrderScreen({ navigation }) {
     { name: "kang cukur 1", status: "completed", tanggal: "202020" },
   ];
 
-  useEffect(() => {
-    dispatch()
-  })
+  // useEffect(() => {
+  //   dispatch()
+  // })
 
   return (
     <View style={styles.container}>
