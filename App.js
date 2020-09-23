@@ -20,7 +20,6 @@ import ProfileScreen from "./screens/LoginScreen";
 import HistoryScreen from "./screens/HistoryScreen2";
 
 
-
 const Tab = createBottomTabNavigator();
 import { Provider } from 'react-redux';
 import store from "./store/";
@@ -67,22 +66,9 @@ export default function App() {
           <Tab.Screen name="Home" component={MainStackNavigator} />
           <Tab.Screen name="Order" component={MapsScreen} />
           <Tab.Screen name="History" component={HistoryScreen} />
-          <Tab.Screen name="Profile" component={ProfileScreen} />
+          <Tab.Screen name="Profile" component={ProfileStackNavigator} />
         </Tab.Navigator>
     </NavigationContainer>
     </Provider>
   );
 }
-
-
-{/* </NavigationContainer>
-
-            return <Ionicons name={iconName} size={size} color={color} />;
-          },
-        })}
-      >
-        <Tab.Screen name="Home" component={MainStackNavigator} />
-        <Tab.Screen name="Order" component={OrderScreen} />
-        <Tab.Screen name="History" component={HistoryScreen} />
-        <Tab.Screen name="Profile" component={ProfileScreen} />
-      </Tab.Navigator> */}

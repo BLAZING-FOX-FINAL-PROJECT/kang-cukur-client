@@ -74,6 +74,9 @@ export default function Register({ navigation }) {
     setPhoneNumber('')
     setPassword('')
   }
+  const goLogin = () => {
+    navigation.navigate("Login")
+  }
 
   return (
     <TouchableWithoutFeedback
@@ -151,6 +154,12 @@ export default function Register({ navigation }) {
           onPress={() => onRegisterHandler()}
         >
           <Text style={styles.buttonText}>REGISTER</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.buttonOutline}
+          onPress={() => goLogin()}
+        >
+          <Text style={styles.buttonTextOutline}>LOGIN</Text>
         </TouchableOpacity>
       </View>
     </TouchableWithoutFeedback>

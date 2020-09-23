@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useCallback } from 'react';
-import { Button, StyleSheet, Text, View, TextInput, Image, Alert, TouchableOpacity, TouchableWithoutFeedback, Keyboard, AsyncStorage } from 'react-native';
+import { Button, StyleSheet, Text, View, TextInput, Switch, Image, Alert, TouchableOpacity, TouchableWithoutFeedback, Keyboard, AsyncStorage } from 'react-native';
 import Colors from '../constants/colors';
 import { Entypo } from '@expo/vector-icons';
 import { useSelector, useDispatch } from "react-redux";
@@ -17,17 +17,16 @@ export default function Login({ navigation }) {
   const getName = useCallback(async () => {
 
     setAccess(await AsyncStorage.getItem("access_token"));
-  });
+
+  }); 
+  const [isEnabled, setIsEnabled] = useState(false);
+  const toggleSwitch = () => setIsEnabled(previousState => !previousState);
+
 
   useEffect(() => {
     getName()
 
   }, [])
-
-
-  // useEffect(() => {
-  //   dispatch(postLogin({telepon, password}));
-  // }, [dispatch]);
 
   const numberInputHandler = input => {
     setPhoneNumber(input.replace(/[^0-9]/g, ''))
@@ -51,6 +50,7 @@ export default function Login({ navigation }) {
     dispatch(postLogin(payload));
     setPhoneNumber('')
     setPassword('')
+    navigation.navigate("Home")
   }
   let token
   if (access) {
@@ -63,6 +63,10 @@ export default function Login({ navigation }) {
     )
   }
 
+  const goRegister = () => {
+    navigation.navigate("Register")
+  }
+
   return (
     <TouchableWithoutFeedback
       onPress={() => {
@@ -71,9 +75,24 @@ export default function Login({ navigation }) {
 
       <View style={styles.screen}>
         <View style={styles.header}>
-          <Text style={styles.textTitle}>Welcome !</Text>
+          <Text style={styles.textTitle}>{isEnabled ? 'MITRA': 'CUSTOMER' } LOGIN</Text>
         </View>
         {/* {token} */}
+        <View style={styles.container}>
+          <Switch
+            // trackColor={{ false: "#767577", true: "#81b0ff" }}
+            // thumbColor={isEnabled ? "#f5dd4b" : "#f4f3f4"}
+            trackColor={"#767577"}
+            thumbColor={Colors.accent}
+            ios_backgroundColor="#3e3e3e"
+            onValueChange={toggleSwitch}
+            value={isEnabled}
+          />
+        </View>
+
+        <View>
+
+        </View>
 
         <View style={styles.inputContainer}>
           <View style={styles.inputFirst}>
@@ -107,6 +126,7 @@ export default function Login({ navigation }) {
 
           </TouchableOpacity>
         </View>
+        
         <TouchableOpacity
           style={styles.button}
           onPress={() => loginHandler()}
@@ -115,7 +135,7 @@ export default function Login({ navigation }) {
         </TouchableOpacity>
         {null && <TouchableOpacity
           style={styles.buttonOutline}
-          onPress={() => loginHandler()}
+          onPress={() => goRegister()}
         >
           <Text style={styles.buttonTextOutline}>Register</Text>
         </TouchableOpacity>}

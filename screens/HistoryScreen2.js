@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Text
 } from "react-native";
-import OrderCards from "../components/OrderCards2";
+import OrderCards from "../components/OrderCards";
 // import DetailsCard from "../components/DetailsCard";
 import Header from "../components/Header";
 import Colors from "../constants/colors";

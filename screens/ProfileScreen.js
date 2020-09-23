@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import { Alert, Button, StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { Alert, Button, StyleSheet, Text, View, Image, TouchableOpacity, AsyncStorage } from 'react-native';
 import Colors from '../constants/colors'
 import Card from '../components/Card';
 import Header from '../components/Header';
 import EditProfile from '../components/EditProfile'
 
-export default function ProfileScreen({ navigation }) {
+export default function ProfileScreen({ navigation, onLogout, token }) {
   const [name, setName] = useState('John Doe')
   const [phoneNumber, setPhoneNumber] = useState('+62 823 620 973 21')
   const [address, setAddress] = useState('Jl. Cinta Boulevard No.3 RT 07/02 Bintaro, Pasangrahan, Jepun, 12330')
@@ -21,6 +21,10 @@ export default function ProfileScreen({ navigation }) {
 
   const cancelEditHandler = () => {
     setShowEdit(false)
+  }
+
+  if (token) {
+    navigation.navigate("Login")
   }
 
   return (
@@ -57,7 +61,7 @@ export default function ProfileScreen({ navigation }) {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.buttonOutline}
-        onPress={() => Alert.alert('Simple Button pressed')}
+        onPress={() => { onLogout }}
       >
         <Text style={styles.buttonTextOutline}>LOGOUT</Text>
       </TouchableOpacity>
