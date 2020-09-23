@@ -25,11 +25,6 @@ export default function Login({ navigation }) {
     getName()
     
   }, [])
-
-
-  // useEffect(() => {
-  //   dispatch(postLogin({telepon, password}));
-  // }, [dispatch]);
   
   const numberInputHandler = input => {
     setPhoneNumber(input.replace(/[^0-9]/g, ''))

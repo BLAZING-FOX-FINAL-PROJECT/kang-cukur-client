@@ -11,7 +11,7 @@ import HomeScreen from "./screens/HomeScreen2";
 
 // import OrderScreen from "./screens/MapsScreen";
 import LoginScreen from "./screens/LoginScreen";
-import HistoryScreen from "./screens/HistoryScreen2";
+import HistoryScreen from "./screens/NoOrder";
 import RegisterScreen from "./screens/RegisterScreen";
 
 import ProfileScreen from "./screens/LoginScreen";
